@@ -9,10 +9,10 @@ namespace OOSEStore
         private readonly Customer m_Customer;
         private readonly Transaction m_Transaction;
 
-        public PurchaseOrchestrationFacade(Customer customer)
+        public PurchaseOrchestrationFacade( string customerName, string purchaseOccasion)
         {
-            m_Customer = customer;
-            m_Transaction = m_Customer.CheckOut("Christmas Purchases");
+            m_Customer = new Customer(customerName);
+            m_Transaction = m_Customer.CheckOut(purchaseOccasion);
         }
         public void BuyItems()
         {

@@ -4,17 +4,13 @@
     {
         static void Main(string[] args)
         {
+            var orchestrator = new PurchaseOrchestrationFacade("Yatin Shah", "Christmas Purchases");
+            orchestrator.BuyItems();
+            orchestrator.GetStoreManagerGift();
+            orchestrator.RentItems();
+            orchestrator.AddCartCoupons();
 
-            var customer = new Customer("Yatin Shah");
-
-            var purchasing = new PurchaseOrchestrationFacade(customer);
-
-            purchasing.BuyItems();
-            purchasing.GetStoreManagerGift();
-            purchasing.RentItems();
-            purchasing.AddCartCoupons();
-
-            purchasing.GenerateXmlReceipt();
+            orchestrator.GenerateXmlReceipt();
         }
     }
 }
