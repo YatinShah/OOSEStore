@@ -52,9 +52,7 @@ namespace OOSEStore.Decorators
             if (!m_discountApplied) return;
             XmlElement element = source.OwnerDocument.CreateElement("LoyaltyDiscount");
             element.SetAttribute("LoyaltyUsed", (-1 * m_BaseValue).ToString());
-            XmlElement freeItem = source.OwnerDocument.CreateElement("FreeItem");
-            freeItem.SetAttribute("_", $"{m_saleItem.GetProductType()} added to purchases.");
-            element.AppendChild(freeItem);
+            element.SetAttribute("_", $"Free {m_saleItem.GetProductType()} added to purchases.");
             source.AppendChild(element);
         }
 

@@ -34,7 +34,8 @@ namespace OOSEStore.Decorators
         /// <param name="unitPrice"></param>
         protected override decimal CalculateDiscount(Transaction transaction, Customer customer, SaleItem item, decimal unitPrice)
         {
-            if (transaction.Purchases.Select(p => p.GetSaleType() != SaleTypes.Free).Count() > MINQTYFORDISCOUNT)
+            var nrItemsPurchased = transaction.Purchases.Sum(p => (p.GetSaleType() != SaleTypes.Free) ? p.GetQuantity() : 0);
+            if (nrItemsPurchased > MINQTYFORDISCOUNT)
             {
                 m_discountApplied = true;
 

@@ -36,7 +36,8 @@ namespace OOSEStore.Decorators
         /// <param name="item"></param>
         protected override decimal CalculateDiscount(Transaction transaction, Customer customer, SaleItem item, decimal unitPrice)
         {
-            if (transaction.Purchases.Select(p => p.GetSaleType() != SaleTypes.Free).Count() > MINQTYFORDISCOUNT)
+            var nrItemsPurchased = transaction.Purchases.Sum(p => (p.GetSaleType() != SaleTypes.Free) ? p.GetQuantity() : 0);
+            if (nrItemsPurchased > MINQTYFORDISCOUNT)
             {
                 m_discountApplied = true;
                 m_saleItem = new SaleItem(m_FreeProduct, 1, SaleTypes.Free);
@@ -49,9 +50,7 @@ namespace OOSEStore.Decorators
         {
             if (!m_discountApplied) return;
             XmlElement element = source.OwnerDocument.CreateElement("FreeDiscount");
-            XmlElement freeItem = source.OwnerDocument.CreateElement("FreeItem");
-            freeItem.SetAttribute("_", $"{m_saleItem.GetProductType()} Item added to purchases.");
-            element.AppendChild(freeItem);
+            element.SetAttribute("_", $"Free {m_saleItem.GetProductType()} added to purchases.");
             source.AppendChild(element);
         }
 

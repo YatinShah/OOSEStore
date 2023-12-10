@@ -36,13 +36,13 @@ namespace OOSEStore.Models
 
         public decimal GetCost()
         {
-            return SalePrice * m_qty;
+            return m_SaleTypes == SaleTypes.Rental ? SalePrice : SalePrice * m_qty;
         }
         public void ToXml(XmlElement source)
         {
             XmlElement element = source.OwnerDocument.CreateElement("Item");
             element.SetAttribute("SaleType", m_SaleTypes.ToString());
-            element.SetAttribute("Quantity", m_qty.ToString());
+            element.SetAttribute(m_SaleTypes == SaleTypes.Rental ? "RentalDays" : "Quantity", m_qty.ToString());
             m_Product?.ToXml(element);
 
             element.SetAttribute("Price", SalePrice.ToString("C"));

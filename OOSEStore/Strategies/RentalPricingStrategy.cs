@@ -22,6 +22,10 @@ namespace OOSEStore.Strategies
             throw new ArgumentException(nameof(item));
         }
 
+        protected override decimal InternalCalculate(Transaction transaction, Customer customer, SaleItem item)
+        {
+            return item.GetQuantity() * m_BaseValue;
+        }
 
     }//end RentalPricingStrategy
 
