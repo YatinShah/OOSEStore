@@ -15,7 +15,7 @@ namespace OOSEStore.Decorators
 
         public PercentDiscountDecorator(PricingStrategy basePriceStrategy) : base(basePriceStrategy)
         {
-            Value = 2m;
+            m_BaseValue = 20m;
             IsItemDiscount = true;
         }
 
@@ -28,7 +28,7 @@ namespace OOSEStore.Decorators
         /// <param name="item"></param>
         protected override decimal CalculateDiscount(Transaction transaction, Customer customer, SaleItem item, decimal unitPrice)
         {
-            return unitPrice * Value / 100;
+            return unitPrice * m_BaseValue / 100;
         }
 
 

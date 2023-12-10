@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public VideoGameRentalPriceStrategy()
         {
-            Value = 6m;
+            m_BaseValue = 6m;
             m_ProductType = ProductTypes.VideoGame;
             m_SaleType = SaleTypes.Rental;
 

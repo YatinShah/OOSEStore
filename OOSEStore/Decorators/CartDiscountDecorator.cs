@@ -19,7 +19,7 @@ namespace OOSEStore.Decorators
         private decimal m_discount = 0m;
         public CartDiscountDecorator(PricingStrategy basePriceStrategy) : base(basePriceStrategy)
         {
-            Value = 10m;
+            m_BaseValue = 10m;
             IsItemDiscount = false;
 
         }
@@ -38,7 +38,7 @@ namespace OOSEStore.Decorators
             {
                 m_discountApplied = true;
 
-                m_discount = transaction.FinalAmount * Value / 100;
+                m_discount = transaction.FinalAmount * m_BaseValue / 100;
                 return m_discount;
             }
             return 0m;

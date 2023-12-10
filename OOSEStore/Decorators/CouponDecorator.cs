@@ -25,7 +25,7 @@ namespace OOSEStore.Decorators
         /// </summary>
         /// 
         /// <param name="customer"></param>
-        protected override int AddLoyalty(Customer customer)
+        protected override int AddLoyalty(Transaction transaction, Customer customer, SaleItem item)
         {
             return 0;
         }

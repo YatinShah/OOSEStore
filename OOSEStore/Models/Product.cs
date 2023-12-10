@@ -15,16 +15,19 @@ namespace OOSEStore.Models
 
         public bool IsPriceFree = false;
         public ProductTypes m_ProductTypes;
+        public ProductSubTypes m_ProductSubTypes;
 
-        public Product(ProductTypes productType)
+        public Product(ProductTypes productType) : this(productType, ProductSubTypes.None) { }
+        public Product(ProductTypes productType, ProductSubTypes subType)
         {
             m_ProductTypes = productType;
-
+            m_ProductSubTypes = subType;
         }
 
         public void ToXml(XmlElement source)
         {
             source.SetAttribute("ProductType", m_ProductTypes.ToString());
+            source.SetAttribute("ProductSubType", m_ProductSubTypes.ToString());
         }
 
 

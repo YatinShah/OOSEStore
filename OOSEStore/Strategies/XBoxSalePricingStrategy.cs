@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public XBoxSalePricingStrategy()
         {
-            Value = 45m;
+            m_BaseValue = 45m;
             m_ProductType = ProductTypes.XBox;
             m_SaleType = SaleTypes.Sale;
 

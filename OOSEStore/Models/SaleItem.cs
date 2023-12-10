@@ -29,8 +29,12 @@ namespace OOSEStore.Models
 
         public SaleTypes GetSaleType() { return m_SaleTypes; }
         public int GetQuantity() { return m_qty; }
+        public ProductSubTypes GetProductSubType()
+        {
+            return m_Product?.m_ProductSubTypes ?? ProductSubTypes.None;
+        }
 
-        internal decimal GetCost()
+        public decimal GetCost()
         {
             return SalePrice * m_qty;
         }

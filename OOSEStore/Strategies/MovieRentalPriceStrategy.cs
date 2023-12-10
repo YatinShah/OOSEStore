@@ -12,14 +12,24 @@ namespace OOSEStore.Strategies
 {
     public class MovieRentalPriceStrategy : RentalPricingStrategy
     {
-
+        protected int m_FreeRentalDays = 0;
+        protected decimal m_MinCost = 0m;
         public MovieRentalPriceStrategy()
         {
-            Value = 2m;
+            LoyaltyPoints = 1;
+            m_FreeRentalDays = 2;
+            m_MinCost = 2m;
+            m_BaseValue = 1.5m;
             m_ProductType = ProductTypes.Movie;
             m_SaleType = SaleTypes.Rental;
         }
 
+        protected override decimal InternalCalculate(Transaction transaction, Customer customer, SaleItem item)
+        {
+            //here quantity is number of days its rented !!
+            var rentalDays = (item.GetQuantity() - m_FreeRentalDays) <= 0 ? 1 : (item.GetQuantity() - m_FreeRentalDays);
+            return m_MinCost + rentalDays * m_BaseValue;
+        }
     }//end MovieRentalPriceStrategy
 
 }//end namespace Store

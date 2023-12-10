@@ -18,7 +18,7 @@ namespace OOSEStore.Factories
             switch (item.GetProductType())
             {
                 case ProductTypes.MusicCD: return new MusicCDSalePricingStrategy();
-                case ProductTypes.Movie: return new MovieSalePricingStrategy();
+                case ProductTypes.Movie: return new MovieRentalFactory().GetMovieRentalStrategy(item.GetProductSubType());
                 case ProductTypes.Book: return new BookSalePricingStrategy();
                 case ProductTypes.Ps4: return new Ps4SalePricingStrategy();
                 case ProductTypes.XBox: return new XBoxSalePricingStrategy();

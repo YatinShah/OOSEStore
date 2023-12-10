@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public Ps4RentalPriceStrategy()
         {
-            Value = 4m;
+            m_BaseValue = 4m;
             m_ProductType = ProductTypes.Ps4;
             m_SaleType = SaleTypes.Rental;
 

@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public MovieSalePricingStrategy()
         {
-            Value = 4m;
+            m_BaseValue = 4m;
             m_ProductType = ProductTypes.Movie;
             m_SaleType = SaleTypes.Sale;
 
@@ -26,7 +26,7 @@ namespace OOSEStore.Strategies
         /// </summary>
         /// 
         /// <param name="customer"></param>
-        protected override int AddLoyalty(Customer customer)
+        protected override int AddLoyalty(Transaction transaction, Customer customer, SaleItem item)
         {
 
             return 0;

@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public BookSalePricingStrategy()
         {
-            Value = 2m;
+            m_BaseValue = 2m;
             m_ProductType = ProductTypes.Book;
             m_SaleType = SaleTypes.Sale;
 

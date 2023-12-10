@@ -8,7 +8,6 @@
 
 using OOSEStore.Strategies;
 using OOSEStore.Factories;
-using OOSEStore.Decorators;
 using OOSEStore.Models;
 using OOSEStore.Iterators;
 using System.Xml;

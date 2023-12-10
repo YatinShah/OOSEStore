@@ -21,7 +21,7 @@ namespace OOSEStore.Decorators
 
         public LoyaltyDiscountDecorator(PricingStrategy basePriceStrategy) : base(basePriceStrategy)
         {
-            Value = MINLOYALTYPOINTS;
+            m_BaseValue = MINLOYALTYPOINTS;
             m_FreeProduct = new Product(ProductTypes.MusicCD);
             IsItemDiscount = false;
 
@@ -37,10 +37,10 @@ namespace OOSEStore.Decorators
         /// <param name="item"></param>
         protected override decimal CalculateDiscount(Transaction transaction, Customer customer, SaleItem item, decimal unitPrice)
         {
-            if (customer.LoyaltyPoints > (int)Value)
+            if (customer.LoyaltyPoints > (int)m_BaseValue)
             {
                 m_discountApplied = true;
-                customer.LoyaltyPoints -= (int)Value;
+                customer.LoyaltyPoints -= (int)m_BaseValue;
                 m_saleItem = new SaleItem(m_FreeProduct, 1, SaleTypes.Free);
 
                 transaction.AddProduct(m_saleItem, customer);
@@ -51,7 +51,7 @@ namespace OOSEStore.Decorators
         {
             if (!m_discountApplied) return;
             XmlElement element = source.OwnerDocument.CreateElement("LoyaltyDiscount");
-            element.SetAttribute("LoyaltyUsed", (-1 * Value).ToString());
+            element.SetAttribute("LoyaltyUsed", (-1 * m_BaseValue).ToString());
             XmlElement freeItem = source.OwnerDocument.CreateElement("FreeItem");
             freeItem.SetAttribute("_", $"{m_saleItem.GetProductType()} added to purchases.");
             element.AppendChild(freeItem);

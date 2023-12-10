@@ -9,9 +9,9 @@ namespace OOSEStore
         private readonly Customer m_Customer;
         private readonly Transaction m_Transaction;
 
-        public PurchaseOrchestrationFacade(Customer acustomer)
+        public PurchaseOrchestrationFacade(Customer customer)
         {
-            m_Customer = acustomer;
+            m_Customer = customer;
             m_Transaction = m_Customer.CheckOut("Christmas Purchases");
         }
         public void BuyItems()
@@ -27,7 +27,10 @@ namespace OOSEStore
         {
             //Renting 2 items
             m_Transaction.AddProduct(new SaleItem(new Product(ProductTypes.VideoGame), 5, SaleTypes.Rental), m_Customer, CouponTypes.Percent);
-            m_Transaction.AddProduct(new SaleItem(new Product(ProductTypes.Movie), 1, SaleTypes.Rental), m_Customer, CouponTypes.Percent);
+
+            m_Transaction.AddProduct(new SaleItem(new Product(ProductTypes.Movie, ProductSubTypes.Regular), 1, SaleTypes.Rental), m_Customer, CouponTypes.Percent);
+            m_Transaction.AddProduct(new SaleItem(new Product(ProductTypes.Movie, ProductSubTypes.Children), 1, SaleTypes.Rental), m_Customer, CouponTypes.Percent);
+            m_Transaction.AddProduct(new SaleItem(new Product(ProductTypes.Movie, ProductSubTypes.New), 1, SaleTypes.Rental), m_Customer, CouponTypes.Percent);
         }
 
         internal void AddCartCoupons()

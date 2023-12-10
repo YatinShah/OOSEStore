@@ -14,7 +14,7 @@ namespace OOSEStore.Strategies
     {
         public MusicCDRentalPriceStrategy()
         {
-            Value = 1m;
+            m_BaseValue = 1m;
             m_ProductType = ProductTypes.MusicCD;
             m_SaleType = SaleTypes.Rental;
 

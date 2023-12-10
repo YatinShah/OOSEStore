@@ -14,13 +14,13 @@ namespace OOSEStore.Strategies
 {
     public abstract class PricingStrategy
     {
-        public decimal Value { get; internal set; }
+        public decimal m_BaseValue { get; internal set; }
         protected ProductTypes m_ProductType;
         protected SaleTypes m_SaleType;
         protected int LoyaltyPoints { get; set; }
         public PricingStrategy()
         {
-            Value = decimal.MaxValue; //must override !!!
+            m_BaseValue = decimal.MaxValue; //must override !!!
             LoyaltyPoints = 0;
         }
 
@@ -29,7 +29,7 @@ namespace OOSEStore.Strategies
         /// </summary>
         /// 
         /// <param name="customer"></param>
-        protected virtual int AddLoyalty(Customer customer) { return LoyaltyPoints; }
+        protected virtual int AddLoyalty(Transaction transaction, Customer customer, SaleItem item) { return LoyaltyPoints; }
 
         /// <summary>
         /// 
@@ -40,7 +40,7 @@ namespace OOSEStore.Strategies
         /// <param name="item"></param>
         public virtual decimal CalculatePrice(Transaction transaction, Customer customer, SaleItem item)
         {
-            var newLoyaltyPoint = AddLoyalty(customer);
+            var newLoyaltyPoint = AddLoyalty(transaction, customer, item);
             customer.LoyaltyPoints += newLoyaltyPoint;
             var itemBasePrice = InternalCalculate(transaction, customer, item);
             Console.Write($"\tItems price: {itemBasePrice}");
@@ -54,7 +54,7 @@ namespace OOSEStore.Strategies
         /// <param name="transaction"></param>
         /// <param name="customer"></param>
         /// <param name="item"></param>
-        protected virtual decimal InternalCalculate(Transaction transaction, Customer customer, SaleItem item) { return Value; }
+        protected virtual decimal InternalCalculate(Transaction transaction, Customer customer, SaleItem item) { return m_BaseValue; }
 
         public virtual void ToXml(XmlElement source)
         { //default there is nothing to print, the price will reflect on the receipt

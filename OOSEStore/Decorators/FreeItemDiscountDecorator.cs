@@ -21,7 +21,7 @@ namespace OOSEStore.Decorators
 
         public FreeItemDiscountDecorator(PricingStrategy basePriceStrategy) : base(basePriceStrategy)
         {
-            Value = 1m;
+            m_BaseValue = 1m;
             IsItemDiscount = false;
             m_FreeProduct = new Product(ProductTypes.Book);
         }

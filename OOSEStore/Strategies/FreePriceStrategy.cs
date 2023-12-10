@@ -15,7 +15,7 @@ namespace OOSEStore.Strategies
 
         public FreePriceStrategy()
         {
-            Value = 0;//default rental price is 10 USD !!
+            m_BaseValue = 0;//default rental price is 10 USD !!
             m_ProductType = ProductTypes.FreeItem;
             m_SaleType = SaleTypes.Free;
 

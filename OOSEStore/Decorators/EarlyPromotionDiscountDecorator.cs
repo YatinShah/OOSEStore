@@ -8,7 +8,7 @@ namespace OOSEStore.Decorators
 
         public EarlyPromotionDiscountDecorator(PricingStrategy basePriceStrategy) : base(basePriceStrategy)
         {
-            Value = 15m;
+            m_BaseValue = 15m;
             IsItemDiscount = true;
         }
 
@@ -21,7 +21,7 @@ namespace OOSEStore.Decorators
         /// <param name="item"></param>
         protected override decimal CalculateDiscount(Transaction transaction, Customer customer, SaleItem item, decimal unitPrice)
         {
-            return unitPrice * Value / 100;
+            return unitPrice * m_BaseValue / 100;
         }
 
 
